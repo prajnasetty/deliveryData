@@ -30,8 +30,8 @@ function createVisualization() {
 	addPizzaDeliveryCount(numbersTable);
 	addTotalPizzaCount(numbersTable);
 	addAverageDeliveryTime(numbersTable);
-
-
+	addTotalSales(numbersTable);
+	addTotalFeedbackEntries(numbersTable);
 }
 
 function insertTableRow(label, data, tableObject){
@@ -63,4 +63,15 @@ function addAverageDeliveryTime(tableObject){
 		.map(x => x.delivery_time)
 		.reduce((acc, curr) => acc+curr, 0)/deliveryData.length
 	insertTableRow("Average delivery time", averageDeliveryTime.toFixed(2), tableObject);
+}
+
+function addTotalSales(tableObject){
+	const totalSales = deliveryData
+						.map(x => x.price)
+						.reduce((acc, curr) => acc+curr, 0);
+	insertTableRow("Total Sales", `\$${totalSales.toFixed(2)}`, tableObject);
+}
+
+function addTotalFeedbackEntries(tableObject){
+	insertTableRow("Number of all feedback entries", feedbackData.length, tableObject);
 }
