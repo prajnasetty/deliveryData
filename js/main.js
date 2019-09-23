@@ -27,11 +27,12 @@ function createVisualization() {
 	 *
 	 * ************************************************************/
 	const numbersTable = document.getElementById("numbers");
-	addPizzaDeliveryCount(numbersTable);
-	addTotalPizzaCount(numbersTable);
-	addAverageDeliveryTime(numbersTable);
-	addTotalSales(numbersTable);
+	addCategoryWiseFeedbackCount(numbersTable);
 	addTotalFeedbackEntries(numbersTable);
+	addTotalSales(numbersTable);
+	addAverageDeliveryTime(numbersTable);
+	addTotalPizzaCount(numbersTable);
+	addPizzaDeliveryCount(numbersTable);
 }
 
 function insertTableRow(label, data, tableObject){
@@ -74,4 +75,13 @@ function addTotalSales(tableObject){
 
 function addTotalFeedbackEntries(tableObject){
 	insertTableRow("Number of all feedback entries", feedbackData.length, tableObject);
+}
+
+function addCategoryWiseFeedbackCount(tableObject){
+	const qualityData = feedbackData
+							.map(x => x.quality);
+	const low = qualityData.filter(x => x=="low").length;
+	const medium = qualityData.filter(x => x=="medium").length;
+	const high = qualityData.filter(x => x =="high").length;
+	insertTableRow("Quality data by category", `Low: ${low} | Medium: ${medium} | High: ${high}`, tableObject);
 }
