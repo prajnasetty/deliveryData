@@ -29,6 +29,7 @@ function createVisualization() {
 	const numbersTable = document.getElementById("numbers");
 	addPizzaDeliveryCount(numbersTable);
 	addTotalPizzaCount(numbersTable);
+	addAverageDeliveryTime(numbersTable);
 
 
 }
@@ -55,4 +56,11 @@ function addTotalPizzaCount(tableObject) {
 function addPizzaDeliveryCount(tableObject){
 	const totalDeliveries = deliveryData.length;
 	insertTableRow("Number of pizza deliveries", totalDeliveries, tableObject);
+}
+
+function addAverageDeliveryTime(tableObject){
+	const averageDeliveryTime = deliveryData
+		.map(x => x.delivery_time)
+		.reduce((acc, curr) => acc+curr, 0)/deliveryData.length
+	insertTableRow("Average delivery time", averageDeliveryTime.toFixed(2), tableObject);
 }
